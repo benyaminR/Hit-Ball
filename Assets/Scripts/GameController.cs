@@ -8,6 +8,11 @@ public class GameController : MonoBehaviour
     private Vector3 touch;
     private Vector3 release;
     
+    //releaseTime - touchTime = dragTime
+    //the speed of ball is depended on dragTime
+    private float touchTime;
+    private float releaseTime;
+
     private float time;
     public float fireRate = 0.5f;
 
@@ -39,17 +44,18 @@ public class GameController : MonoBehaviour
 
      //if pressed down(first touch)
     if(Input.GetButtonDown("Fire1")&&Time.time > nextThrow){
-		nextThrow = Time.time + fireRate;        
+		nextThrow = Time.time + fireRate;
+        touchTime = Time.time;      
         touch = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
-        Debug.Log("ButtonDown!");
 
     }
     //fire the ball and instantiate another one
     if(Input.GetButtonUp("Fire1")){
         release = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
-        instantiatedBall.GetComponent<Shoot>().fire(touch,release);
+        releaseTime = Time.time;
+        float dragTime = releaseTime - touchTime;//dragTime        
+        instantiatedBall.GetComponent<Shoot>().fire(touch,release,dragTime);
         instantiatedBall = Instantiate(ball,dropPoint,Quaternion.identity);
-        Debug.Log("ButtonUp!");
     }
     
     

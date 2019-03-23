@@ -25,9 +25,11 @@ public class Shoot : MonoBehaviour
         }
     }
 
-    public void fire(Vector3 touch, Vector3 release){
+    public void fire(Vector3 touch, Vector3 release,float dragTime){
         direction = directionMagnifer *(release-touch);
-        direction.z = speed;
+        direction.z = speed / dragTime;
+        Debug.Log("speed:"+speed/dragTime);
+        Debug.Log("DragTime:"+dragTime);
         shouldFire = !shouldFire;
     }
 }
