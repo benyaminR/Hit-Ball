@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
 
@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
     private float time;
     public float fireRate = 0.5f;
 
+    public Text scoreText;
+
     private float nextThrow;
 
     public GameObject ball;
@@ -26,6 +28,8 @@ public class GameController : MonoBehaviour
     private bool firstBallInstantiated = false;
 
     private GameObject instantiatedBall;
+
+    private static int score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -59,5 +63,11 @@ public class GameController : MonoBehaviour
     }
     
     
+    }
+
+    public void addScore(){
+        Debug.Log("Goal!!!!");
+        score += 1; 
+        scoreText.text = "Score:"+score;
     }
 }
