@@ -26,8 +26,8 @@ public class Shoot : MonoBehaviour
     }
 
     public void fire(Vector3 touch, Vector3 release,float dragTime){
-        direction = directionMagnifer *(release-touch);
-        direction.z = speed / dragTime;
+        direction = directionMagnifer *(release-touch); 
+        direction.z = speed / dragTime;                 //for smaller dragTimes the ball is faster
         Debug.Log("speed:"+speed/dragTime);
         Debug.Log("DragTime:"+dragTime);
         shouldFire = !shouldFire;
