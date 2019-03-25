@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     public float fireRate = 0.5f;
 
     public Text scoreText;
+    public Text ballsText;
 
     private float nextThrow;
 
@@ -30,6 +31,8 @@ public class GameController : MonoBehaviour
     private GameObject instantiatedBall;
 
     private static int score = 0;
+
+    private static int balls = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -47,28 +50,48 @@ public class GameController : MonoBehaviour
     }
 
      //if pressed down(first touch)
-    if(Input.GetButtonDown("Fire1")&&Time.time > nextThrow){
+    if(Input.GetButtonDown("Fire1")&&Time.time > nextThrow && balls >0){
 		nextThrow = Time.time + fireRate;
         touchTime = Time.time;      
         touch = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
 
     }
     //fire the ball and instantiate another one
-    if(Input.GetButtonUp("Fire1")){
+    if(Input.GetButtonUp("Fire1")&& balls >0){
         release = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
         releaseTime = Time.time;
         float dragTime = releaseTime - touchTime;//dragTime        
         instantiatedBall.GetComponent<Shoot>().fire(touch,release,dragTime);
         instantiatedBall = Instantiate(ball,dropPoint,Quaternion.identity);
+        balls--; // reduce balls
+        ballsText.text = "Balls:"+balls;
     }
     
-    
-    }
+    if(balls <= 0){
+        Debug.Log("GAMEOVER BITCH");
+        }
 
+    //check game state
+    updateGameState();
+
+    }
     public void addScore(){
         Debug.Log("Goal!!!!");
         score += 1; 
         scoreText.text = "Score:"+score;
-        //TODO check is there any other 
+
     }
+
+    public void addBall(){
+        balls++;
+        ballsText.text = "Balls:"+balls;
+    }
+
+    public void updateGameState(){
+        if(GameObject.FindGameObjectsWithTag("Can").Length == 0){
+            Debug.Log("Won");
+        }
+
+    }
+
 }

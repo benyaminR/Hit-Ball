@@ -28,5 +28,9 @@ public class RedCan : MonoBehaviour
             }
             Debug.Log("boom");
         }
+        //hit ground
+        if(collision.gameObject.layer == 9){
+            Destroy(gameObject,3f);
+        }
     }
 }
