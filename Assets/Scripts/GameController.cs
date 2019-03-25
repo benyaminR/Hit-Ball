@@ -69,5 +69,6 @@ public class GameController : MonoBehaviour
         Debug.Log("Goal!!!!");
         score += 1; 
         scoreText.text = "Score:"+score;
+        //TODO check is there any other 
     }
 }

@@ -9,6 +9,7 @@ public class Shoot : MonoBehaviour
 
     private bool shouldFire;
 
+    public float speedLimit;
 
     private Vector3 direction;
     // Start is called before the first frame update
@@ -25,10 +26,10 @@ public class Shoot : MonoBehaviour
             shouldFire = !shouldFire;
         }
     }
-
     public void fire(Vector3 touch, Vector3 release,float dragTime){
         direction = directionMagnifer *(release-touch); 
-        direction.z = speed / dragTime;                 //for smaller dragTimes the ball is faster                 
+        direction.z = speed / dragTime;                 //for smaller dragTimes the ball is faster
+        direction.z = direction.z >= speedLimit ? speedLimit :direction.z;//if greater than speedLimit set speed to speedLimit                   
         Debug.Log("speed:"+speed/dragTime);
         Debug.Log("DragTime:"+dragTime);
         shouldFire = !shouldFire;
