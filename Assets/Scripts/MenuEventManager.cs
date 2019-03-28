@@ -11,7 +11,11 @@ public class MenuEventManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startButton.onClick.AddListener(()=>SceneManager.LoadScene("StartScene"));
+        startButton.onClick.AddListener(()=>{
+            PlayerPrefs.SetInt("score",0);
+            PlayerPrefs.SetInt("lvl",1);
+            SceneManager.LoadScene("StartScene");
+            });
         settingsButton.onClick.AddListener(()=>Debug.Log("Settings!"));
         exitButton.onClick.AddListener(()=>Application.Quit());
 

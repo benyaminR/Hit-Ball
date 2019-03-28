@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class GameController : MonoBehaviour
 {
 
@@ -18,9 +20,10 @@ public class GameController : MonoBehaviour
 
     public Text scoreText;
     public Text ballsText;
-
+    public Text lvlText;
     private float nextThrow;
 
+    public GameObject[] lvls;
     public GameObject ball;
     //where to drop the balls
     public Vector3 dropPoint = new Vector3(0,7,-6);
@@ -30,14 +33,32 @@ public class GameController : MonoBehaviour
 
     private GameObject instantiatedBall;
 
-    private static int score = 0;
+    private  int balls = 3;
+    private int score;
+    private int lvl;
 
-    private static int balls = 3;
+
+    private bool alreadyCheck;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        score = PlayerPrefs.GetInt("score");
+        lvl = PlayerPrefs.GetInt("lvl");
+        scoreText.text = "score:"+score;
+        lvlText.text = "level:"+lvl;
+
+
+        switch(lvl){
+            case 1 : 
+            Instantiate(lvls[0]);
+            return;
+            case 2:
+            Instantiate(lvls[1]);
+            return;
+            
+        }
     }
 
     // Update is called once per frame
@@ -72,8 +93,10 @@ public class GameController : MonoBehaviour
         }
 
     //check game state
+    if(!alreadyCheck)
     updateGameState();
 
+    
     }
     public void addScore(){
         Debug.Log("Goal!!!!");
@@ -87,9 +110,19 @@ public class GameController : MonoBehaviour
         ballsText.text = "Balls:"+balls;
     }
 
+
     public void updateGameState(){
-        if(GameObject.FindGameObjectsWithTag("Can").Length == 0){
-            Debug.Log("Won");
+        
+        if(GameObject.FindGameObjectsWithTag("RedCan").Length == 0 && 
+            GameObject.FindGameObjectsWithTag("GreenCan").Length == 0 &&
+            GameObject.FindGameObjectsWithTag("YellowCan").Length == 0)
+            {
+            alreadyCheck = true;
+            lvl++;                          //lvl up
+            PlayerPrefs.SetInt("lvl",lvl);
+            PlayerPrefs.SetInt("score",score);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("StartScene");        
         }
 
     }

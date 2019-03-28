@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 2111359366611097165}
   - component: {fileID: 2111359366124220725}
   - component: {fileID: 2111359366124220724}
-  - component: {fileID: 2111359366124220727}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GreenCan
-  m_TagString: Can
+  m_TagString: GreenCan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,16 +110,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 79e16cb9ae73c88439ad33271202ef15, type: 3}
---- !u!114 &2111359366124220727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2111359366613354637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9a2b780e4836a40a54c3daf3a4f16a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 0}
